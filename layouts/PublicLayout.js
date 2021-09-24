@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import Head from "next/head";
 import Router from "next/router";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import useMMACbalance from "../hooks/useMMACbalance";
+import useMicroMachines from "../hooks/useMicroMachines";
 import {
     Layout,
     Menu,
@@ -19,10 +21,13 @@ import { useWallet } from "use-wallet";
 import useGlobal from "../hooks/useGlobal";
 
 import useMicroMachineManufacturingPlant from "../hooks/useMicroMachineManufacturingPlant";
+import useNANObalance from "../hooks/useNANObalance";
 const { Header, Content, Footer } = Layout;
 const { Title, Text } = Typography;
 
 export default function PublicLayout({ children }) {
+    const { balance } = useMMACbalance([]);
+    const { nbalance } = useNANObalance([]);
     const [drawer, showDrawer] = useState(false);
     const [state, actions] = useGlobal([]);
     const { security, getFields, connected } =
@@ -386,7 +391,11 @@ export default function PublicLayout({ children }) {
                                             <img src="/img/globe.png" alt="" />
                                         </li>
                                     </a>
-                                    <a href="#" title="Bridge">
+                                    <a
+                                        href="#"
+                                        title="Bridge"
+                                        onClick={() => Router.push("/bridge")}
+                                    >
                                         <li>
                                             <img src="/img/Bridge.png" alt="" />
                                         </li>
@@ -407,7 +416,7 @@ export default function PublicLayout({ children }) {
                                                     src="/img/Manufacturing_center.png"
                                                     alt=""
                                                 />
-                                                3
+                                                {balance}
                                             </a>
                                         </li>
 
@@ -417,7 +426,7 @@ export default function PublicLayout({ children }) {
                                                     src="/img/NanoMachines.png"
                                                     alt=""
                                                 />
-                                                5261
+                                                {nbalance * 0.000000001}
                                             </a>
                                         </li>
 
