@@ -1,6 +1,7 @@
 import React from "react";
-
+import useMMACbalance from "../hooks/useMMACbalance";
 function To_Polygon() {
+    const { balance } = useMMACbalance([]);
     return (
         <>
             <section className="To_Polygon">
@@ -21,7 +22,9 @@ function To_Polygon() {
                             </p>
                             <br />
                             <p className="to_pol_bal">Your BNB Balance:</p>
-                            <button className="to_pol_btn">361 BNB</button>
+                            <button className="to_pol_btn">
+                                {balance} MMAC
+                            </button>
                         </div>
                         <div className="col-md-8">
                             <div className="to_pol_card">
@@ -55,7 +58,7 @@ function To_Polygon() {
                                             </div>
                                         </div>
                                         <p className="available_MMAC mt-3">
-                                            Available: 361 MMAC
+                                            Available: {balance} MMAC
                                         </p>
                                     </div>
                                 </div>
